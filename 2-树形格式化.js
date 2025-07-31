@@ -10,6 +10,8 @@ const data = [
   { id: 9, pid: 7, name: "桌子" },
 ];
 
+//slice 返回新数组（不修改原数组）
+//splice 直接修改原数组
 function formatDataTree(data) {
   let parents = data.filter((p) => p.pid === 0);
   let children = data.filter((c) => c.pid !== 0);
@@ -32,4 +34,5 @@ function formatDataTree(data) {
   }
   return parents;
 }
+
 console.log(formatDataTree(data));

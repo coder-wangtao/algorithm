@@ -10,6 +10,8 @@ function curry(fn, ...args) {
 }
 
 const add = (x, y, z) => x + y + z;
+
 const curryAdd = curry(add);
+
 console.log(curryAdd(1, 2, 3));
 console.log(curryAdd(1)(2)(3));

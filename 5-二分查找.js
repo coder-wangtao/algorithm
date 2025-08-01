@@ -1,3 +1,6 @@
+//向下取整
+// Math.floor
+
 function binarySearch(arr, target) {
   let left = 0;
   let right = arr.length - 1;

@@ -24,6 +24,7 @@ function printList(node) {
 }
 
 //1 -> 2 -> 3 -> 4 -> 5
+//两个游标 cur = head pre = null(head前一个)
 var reverseList = function (head) {
   let cur = head;
   let pre = null;

@@ -37,25 +37,18 @@ class MinHeap {
     this.heap = [];
   }
 
-  peek() {
-    return this.length === 0 ? null : this.heap[0];
-  }
-
   push(val) {
     this.heap.push(val);
     this._heapifyUp();
-    //从下往上调整堆
   }
 
   _heapifyUp() {
-    let i = this.heap.length; //从堆底最后一个元素开始，从下往上调整堆
-    let index = i - 1;
-    //一直遍历到堆顶部
+    let index = this.heap.length - 1;
     while (index > 0) {
       const parentIndex = (index - 1) >>> 1;
       const parent = this.heap[parentIndex];
       const child = this.heap[index];
-      if (parent > child) {
+      if (child < parent) {
         this.heap[parentIndex] = child;
         this.heap[index] = parent;
         index = parentIndex;
@@ -64,86 +57,61 @@ class MinHeap {
       }
     }
   }
-
   pop() {
     return this._heapifyDown();
   }
 
   _heapifyDown() {
-    //拿到堆底最后一个元素开始，放到堆顶上，从上往下调整堆
     if (this.heap.length === 0) {
       return null;
     }
     const first = this.heap[0];
-    const top = this.heap.pop();
-    if (first !== top) {
-      //证明heap中有两个甚至更多的元素
-      this.heap[0] = top;
+    const last = this.heap.pop();
+    if (first !== last) {
       let index = 0;
+      this.heap[0] = last;
       const length = this.heap.length;
       const halfLength = length >>> 1;
-
-      //halfLength 是 Math.floor(length / 2)，它表示堆中“最后一个有子节点的父节点”的索引。
-      //对于堆的最后一个元素，它没有子节点，因此它不需要进行堆化操作。所以，index < halfLength 保证了只有那些有子节点的节点才会被堆化。
-      // 0 1 2
-      //      0
-      //    1   2
-      // 3  4 5  6
-      //通过 index < halfLength，我们可以确保不会试图调整没有子节点的节点。
-
       while (index < halfLength) {
         const leftIndex = (index + 1) * 2 - 1;
         const left = this.heap[leftIndex];
         const rightIndex = leftIndex + 1;
         const right = this.heap[rightIndex];
-        if (left < top) {
-          //left < 第一个
-          if (rightIndex < length && right < left) {
-            //right存在 并且 right更小
+        if (left < last) {
+          //left小
+          if (rightIndex < length && right < last) {
+            //right小
             this.heap[index] = right;
-            this.heap[rightIndex] = top;
+            this.heap[rightIndex] = last;
             index = rightIndex;
           } else {
-            //left更小或者right不存在
+            //left小
             this.heap[index] = left;
-            this.heap[leftIndex] = top;
+            this.heap[leftIndex] = last;
             index = leftIndex;
           }
         } else if (rightIndex < length && right < last) {
           this.heap[index] = right;
-          this.heap[rightIndex] = top;
+          this.heap[rightIndex] = last;
           index = rightIndex;
         } else {
-          //根节点最小//不需要调整
           return;
         }
       }
     }
-    return first;
-  }
 
-  size() {
-    return this.heap.length;
+    return first;
   }
 }
 
 const minHeap = new MinHeap();
-
-var findKthLargest = function (nums, k) {
-  const minHeap = new MinHeap();
-  // 遍历数组
-  for (let num of nums) {
-    // 如果堆的元素少于 k 个，就加入堆
-    if (minHeap.size() < k) {
-      minHeap.push(num);
-    } else if (num > minHeap.peek()) {
-      // 如果当前元素大于堆顶元素，就弹出堆顶并插入新元素
-      minHeap.pop();
-      minHeap.push(num);
-    }
-  }
-
-  // 堆顶元素就是第 k 大的元素
-  return minHeap.peek();
-};
+minHeap.push(1);
+minHeap.push(2);
+minHeap.push(3);
+minHeap.push(4);
+minHeap.push(5);
+minHeap.push(6);
+minHeap.pop();
+console.log(minHeap);
+var findKthLargest = function (nums, k) {};
 console.log(findKthLargest(nums, k));

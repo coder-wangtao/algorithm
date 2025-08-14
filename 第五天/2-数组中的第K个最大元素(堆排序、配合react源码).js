@@ -1,8 +1,6 @@
 // 给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。
 // 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。
 
-const nums = [3, 2, 3, 1, 2, 4, 5, 5, 6];
-const k = 4;
 //满二叉树：如果二叉树中除了叶子结点，每个结点的度都为 2，则此二叉树称为满二叉树。
 //      o
 //   o    o
@@ -36,18 +34,19 @@ class MinHeap {
   constructor() {
     this.heap = [];
   }
-
   push(val) {
     this.heap.push(val);
     this._heapifyUp();
   }
 
   _heapifyUp() {
-    let index = this.heap.length - 1;
+    //从下往上堆化
+    const length = this.heap.length;
+    let index = length - 1;
     while (index > 0) {
+      const child = this.heap[index];
       const parentIndex = (index - 1) >>> 1;
       const parent = this.heap[parentIndex];
-      const child = this.heap[index];
       if (child < parent) {
         this.heap[parentIndex] = child;
         this.heap[index] = parent;
@@ -57,40 +56,42 @@ class MinHeap {
       }
     }
   }
+
   pop() {
     return this._heapifyDown();
   }
 
   _heapifyDown() {
+    //从上往下堆化
     if (this.heap.length === 0) {
       return null;
     }
-    const first = this.heap[0];
     const last = this.heap.pop();
+    const first = this.heap[0];
     if (first !== last) {
-      let index = 0;
       this.heap[0] = last;
+      let index = 0;
       const length = this.heap.length;
       const halfLength = length >>> 1;
+
       while (index < halfLength) {
         const leftIndex = (index + 1) * 2 - 1;
         const left = this.heap[leftIndex];
         const rightIndex = leftIndex + 1;
         const right = this.heap[rightIndex];
         if (left < last) {
-          //left小
-          if (rightIndex < length && right < last) {
-            //right小
+          if (right < left && rightIndex < length) {
+            //right最小
             this.heap[index] = right;
             this.heap[rightIndex] = last;
             index = rightIndex;
           } else {
-            //left小
+            //left最小
             this.heap[index] = left;
             this.heap[leftIndex] = last;
             index = leftIndex;
           }
-        } else if (rightIndex < length && right < last) {
+        } else if (right < last && rightIndex < length) {
           this.heap[index] = right;
           this.heap[rightIndex] = last;
           index = rightIndex;
@@ -102,16 +103,52 @@ class MinHeap {
 
     return first;
   }
+
+  size() {
+    return this.heap.length;
+  }
+
+  peek() {
+    return this.heap[0];
+  }
 }
 
-const minHeap = new MinHeap();
-minHeap.push(1);
-minHeap.push(2);
-minHeap.push(3);
-minHeap.push(4);
-minHeap.push(5);
-minHeap.push(6);
-minHeap.pop();
-console.log(minHeap);
-var findKthLargest = function (nums, k) {};
+// const minHeap = new MinHeap();
+// minHeap.push(1);
+// minHeap.push(2);
+// minHeap.push(3);
+// minHeap.push(4);
+// minHeap.push(5);
+// minHeap.pop();
+// minHeap.push(2);
+// minHeap.pop();
+// minHeap.push(4);
+// minHeap.pop();
+// minHeap.push(5);
+// minHeap.pop();
+// minHeap.push(5);
+// minHeap.pop();
+// minHeap.push(6);
+// console.log(minHeap);
+//
+const nums = [3, 2, 3, 1, 2, 4, 5, 5, 6];
+const k = 4;
+
+var findKthLargest = function (nums, k) {
+  const minHeap = new MinHeap();
+  nums.forEach((n) => {
+    minHeap.push(n);
+    if (minHeap.size() > k) {
+      minHeap.pop();
+    }
+  });
+  return minHeap.peek();
+};
 console.log(findKthLargest(nums, k));
+//    2
+//  4  3
+// 6 5
+
+//   3
+//  4 5
+// 6

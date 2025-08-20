@@ -1,5 +1,6 @@
 //向下取整
 // Math.floor
+// 在不涉及负数的情况下，5 >>> 1 和 Math.floor(5 / 2) 的结果是相同的，都是 2。
 
 function binarySearch(arr, target) {
   let left = 0;

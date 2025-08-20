@@ -10,15 +10,16 @@ const n = 3;
 //  //len1 2 len2 1 //len1 2 len2 0 //len1 1 len2 0 //len1 1 len2 -1
 
 var merge = function (nums1, m, nums2, n) {
-  let n1 = m - 1;
-  let n2 = n - 1;
-  let len = nums1.length - 1;
-  while (n2 >= 0) {
-    if (m < 0) {
-      nums1[len--] = nums2[n2--];
-      return;
+  let i1 = m - 1,
+    i2 = n - 1,
+    mn = m + n - 1;
+  while (i2 >= 0) {
+    if (i1 >= 0 && nums1[i1] > nums2[i2]) {
+      nums1[mn] = nums1[i1--];
+    } else {
+      nums1[mn] = nums2[i2--];
     }
-    nums1[len--] = nums1[n1] > nums2[n2] ? nums1[n1--] : nums2[n2--];
+    mn--;
   }
 };
 merge(nums1, m, nums2, n);

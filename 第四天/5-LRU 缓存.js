@@ -8,8 +8,8 @@
  * @param {number} capacity
  */
 var LRUCache = function (capacity) {
-  this.capacity = capacity;
   this.map = new Map();
+  this.capacity = capacity;
 };
 
 /**
@@ -17,10 +17,12 @@ var LRUCache = function (capacity) {
  * @return {number}
  */
 LRUCache.prototype.get = function (key) {
-  let val = this.map.get(key);
-  if (typeof val == "undefined") {
+  //获取的时候先删除再添加
+  const val = this.map.get(key);
+  if (!val) {
     return -1;
   }
+  //获取的时候先删除再添加
   this.map.delete(key);
   this.map.set(key, val);
   return val;
@@ -32,6 +34,7 @@ LRUCache.prototype.get = function (key) {
  * @return {void}
  */
 LRUCache.prototype.put = function (key, value) {
+  //添加的时候先删除再添加
   if (this.map.has(key)) {
     this.map.delete(key);
   }
@@ -40,6 +43,7 @@ LRUCache.prototype.put = function (key, value) {
   if (this.map.size > this.capacity) {
     this.map.delete(keys.next().value);
   }
+  //到达容量时候删除最后一个
 };
 
 /**
@@ -61,11 +65,11 @@ console.log(lRUCache.get(1)); // 返回 -1 (未找到)
 console.log(lRUCache.get(3)); // 返回 3
 console.log(lRUCache.get(4)); // 返回 4
 
-const map = new Map();
-map.set(1, 1);
-map.set(2, 2);
-map.set(3, 3);
-const keys = map.keys();
-console.log(map);
-console.log(keys.next().value);
-console.log(keys.next().value);
+// const map = new Map();
+// map.set(1, 1);
+// map.set(2, 2);
+// map.set(3, 3);
+// const keys = map.keys();
+// console.log(map);
+// console.log(keys.next().value);
+// console.log(keys.next().value);

@@ -14,9 +14,9 @@ var maxSubArray = function (nums) {
     const num = nums[i];
     // 如果之前的子数组和为正，就继续加；否则从当前元素重新开始
     if (currentSubarraySum > 0) {
-      currentSubarraySum += num;
+      currentSubarraySum += num; //如果 currentSubarraySum 为正，说明当前子数组和继续加上当前元素会得到一个更大的和。
     } else {
-      currentSubarraySum = num;
+      currentSubarraySum = num; //如果 currentSubarraySum 为非正，说明从当前元素开始重新计算子数组和会更好。
     }
 
     // 更新全局最大值

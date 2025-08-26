@@ -66,8 +66,8 @@ class MinHeap {
     if (this.heap.length === 0) {
       return null;
     }
-    const last = this.heap.pop();
     const first = this.heap[0];
+    const last = this.heap.pop();
     if (first !== last) {
       this.heap[0] = last;
       let index = 0;
@@ -96,11 +96,10 @@ class MinHeap {
           this.heap[rightIndex] = last;
           index = rightIndex;
         } else {
-          return;
+          break;
         }
       }
     }
-
     return first;
   }
 
@@ -112,7 +111,6 @@ class MinHeap {
     return this.heap[0];
   }
 }
-
 // const minHeap = new MinHeap();
 // minHeap.push(1);
 // minHeap.push(2);

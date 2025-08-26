@@ -1,43 +1,103 @@
-var sortArray = function (nums) {
-  let n = nums.length;
-  // 1. 构建最大堆
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
-    heapify(nums, n, i);
+class MinHeap {
+  constructor() {
+    this.heap = [];
+  }
+  push(val) {
+    this.heap.push(val);
+    this._heapifyUp();
   }
 
-  // 2. 逐步取出堆顶元素放到末尾，调整堆
-  for (let i = n - 1; i > 0; i--) {
-    // 交换堆顶（最大值）和当前末尾元素
-    [nums[0], nums[i]] = [nums[i], nums[0]];
-    // 调整剩余堆
-    heapify(nums, i, 0);
+  _heapifyUp() {
+    //从下往上堆化
+    const length = this.heap.length;
+    let index = length - 1;
+    while (index > 0) {
+      const child = this.heap[index];
+      const parentIndex = (index - 1) >>> 1;
+      const parent = this.heap[parentIndex];
+      if (child < parent) {
+        this.heap[parentIndex] = child;
+        this.heap[index] = parent;
+        index = parentIndex;
+      } else {
+        return;
+      }
+    }
   }
 
-  return nums;
-};
-
-function heapify(arr, heapSize, i) {
-  let largest = i; // 假设当前节点最大
-  let left = 2 * i + 1; // 左子节点索引
-  let right = 2 * i + 2; // 右子节点索引
-
-  // 如果左子节点比根大
-  if (left < heapSize && arr[left] > arr[largest]) {
-    largest = left;
+  pop() {
+    return this._heapifyDown();
   }
 
-  // 如果右子节点比目前最大值大
-  if (right < heapSize && arr[right] > arr[largest]) {
-    largest = right;
+  _heapifyDown() {
+    //从上往下堆化
+    if (this.heap.length === 0) {
+      return null;
+    }
+    const first = this.heap[0];
+    const last = this.heap.pop();
+    if (first !== last) {
+      this.heap[0] = last;
+      let index = 0;
+      const length = this.heap.length;
+      const halfLength = length >>> 1;
+
+      while (index < halfLength) {
+        const leftIndex = (index + 1) * 2 - 1;
+        const left = this.heap[leftIndex];
+        const rightIndex = leftIndex + 1;
+        const right = this.heap[rightIndex];
+        if (left < last) {
+          if (right < left && rightIndex < length) {
+            //right最小
+            this.heap[index] = right;
+            this.heap[rightIndex] = last;
+            index = rightIndex;
+          } else {
+            //left最小
+            this.heap[index] = left;
+            this.heap[leftIndex] = last;
+            index = leftIndex;
+          }
+        } else if (right < last && rightIndex < length) {
+          this.heap[index] = right;
+          this.heap[rightIndex] = last;
+          index = rightIndex;
+        } else {
+          break;
+        }
+      }
+    }
+    return first;
   }
 
-  // 如果最大值不是根节点，则交换并递归调整子树
-  if (largest !== i) {
-    [arr[i], arr[largest]] = [arr[largest], arr[i]];
-    heapify(arr, heapSize, largest);
+  size() {
+    return this.heap.length;
+  }
+
+  peek() {
+    return this.heap[0];
   }
 }
+const minHeap = new MinHeap();
+console.log(minHeap);
+var sortArray = function (nums) {
+  const res = [];
+  for (let i = 0; i < nums.length; i++) {
+    minHeap.push(nums[i]);
+  }
+
+  for (let j = 0; j < nums.length; j++) {
+    res[j] = minHeap.pop();
+  }
+
+  return res;
+};
 
 // 测试
-let arr = [12, 11, 13, 5, 6, 7];
+let arr = [5, 2, 3, 1];
 console.log(sortArray(arr)); // 输出 [5, 6, 7, 11, 12, 13]
+
+//    1
+//  2  3
+// 5

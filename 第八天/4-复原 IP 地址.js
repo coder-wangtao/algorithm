@@ -6,13 +6,6 @@
 
 const s = "25525511135";
 
-var restoreIpAddresses = function (s) {
-  if (s.length > 12) return []; // IP 最长 12 位 (4段，每段最多3位)
-  let result = [];
-  fn(s, [], result);
-  return result;
-};
-
 // 递归结束条件：当判断到最后一段时，如果合法直接加入到结果集
 // 递归体：每一段长度可以为1、2、3，所以每次都有三种可能
 var restoreIpAddresses = function (s) {

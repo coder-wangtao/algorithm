@@ -16,11 +16,11 @@ var restoreIpAddresses = function (s) {
 };
 
 function backtrack(remain, temp, result) {
+  debugger;
   if (temp.length === 3) {
     if (isValid(remain)) result.push([...temp, remain].join("."));
     return;
   }
-  debugger;
   for (let i = 1; i <= 3; i++) {
     if (i <= remain.length && isValid(remain.substr(0, i))) {
       backtrack(remain.substr(i), [...temp, remain.substr(0, i)], result);

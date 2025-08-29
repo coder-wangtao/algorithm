@@ -8,29 +8,78 @@ const s = "25525511135";
 
 // 递归结束条件：当判断到最后一段时，如果合法直接加入到结果集
 // 递归体：每一段长度可以为1、2、3，所以每次都有三种可能
-var restoreIpAddresses = function (s) {
-  if (s.length > 12) return [];
-  let result = [];
-  backtrack(s, [], result);
-  return result;
-};
+//"25525511135"
+// 255 255 111 35
+// 255 255 11 135
 
-function backtrack(remain, temp, result) {
-  debugger;
-  if (temp.length === 3) {
-    if (isValid(remain)) result.push([...temp, remain].join("."));
-    return;
-  }
-  for (let i = 1; i <= 3; i++) {
-    if (i <= remain.length && isValid(remain.substr(0, i))) {
-      backtrack(remain.substr(i), [...temp, remain.substr(0, i)], result);
+var restoreIpAddresses = function (s) {
+  let res = [];
+  for (let i = 0; i < 3; i++) {
+    // 第一位
+    let a = s.slice(0, i + 1);
+
+    if (!check(a)) continue;
+    for (let j = i + 1; j < i + 4; j++) {
+      // 第二位
+      let b = s.slice(i + 1, j + 1);
+      if (!check(b)) continue;
+      for (let k = j + 1; k < j + 4; k++) {
+        // 第三位
+        let c = s.slice(j + 1, k + 1);
+        let d = s.slice(k + 1);
+        let flag = check(c) && check(d);
+        flag && res.push(`${a}.${b}.${c}.${d}`);
+      }
     }
   }
+  return res;
+};
+/* 判断是否合法*/
+function check(str) {
+  if (str === "" || str < 0 || str > 255) return false;
+  if (str[0] == "0" && str.length > 1) return false;
+  return true;
 }
 
-function isValid(s) {
-  if (!s.length) return false;
-  if (s.length > 1 && s[0] === "0") return false;
-  return +s >= 0 && +s <= 255;
-}
 console.log(restoreIpAddresses(s));
+
+// backtrack("25525511135", [], result)
+//   temp.length = 0 → 不是终止条件
+//   i=1 → "2"，合法
+//      backtrack("5525511135", ["2"], result)
+//       再次尝试取 1、2、3 位作为第二段：
+//       "5" → 合法
+//       "55" → 合法
+//       "552" → 不合法（>255）
+
+//   i=2 → "25"，合法
+//       backtrack("525511135", ["25"], result)
+// 第二段同样尝试 1、2、3 位：
+// "5" → 合法
+// "52" → 合法
+// "525" → 不合法
+
+//   i=3 → "255"，合法
+// 第二段：
+// "2" → 合法 → backtrack("5511135", ["255","2"], result)
+// "25" → 合法 → backtrack("511135", ["255","25"], result)
+// "255" → 合法 → backtrack("11135", ["255","255"], result)
+
+// 只有第三个子分支 ["255","255"] 继续向下：
+
+// backtrack("11135", ["255","255"], result)
+// 第三段：
+
+// "1" → backtrack("1135", ["255","255","1"], result)
+
+// "11" → backtrack("135", ["255","255","11"], result)
+
+// "111" → backtrack("35", ["255","255","111"], result)
+
+// **第四段（remain）**检查：
+
+// ["255","255","1"] → remain = "1135" → 不合法 (>255)
+
+// ["255","255","11"] → remain = "35" → 合法 ✅ → 加入结果 "255.255.11.35"
+
+// ["255","255","111"] → remain = "35" → 合法 ✅ → 加入结果 "255.255.111.35"

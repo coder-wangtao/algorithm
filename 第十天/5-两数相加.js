@@ -5,6 +5,9 @@
 //5 -> 6 -> 4
 //7 -> 0 -> 8
 
+//l1 = [9,9,9,9,9,9,9]
+//l2 = [9,9,9,9]
+//     [8,9,9,9,0,0,0,1]
 class ListNode {
   constructor(val = 0, next = null) {
     this.val = val;

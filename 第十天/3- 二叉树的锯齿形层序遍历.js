@@ -24,7 +24,7 @@ var zigzagLevelOrder = function (root) {
     let res = [];
     function dfs(root, depth) {
       if (!root) return;
-      if (res[depth] == undefined) {
+      if (res[depth] === undefined) {
         res[depth] = [];
       }
       if (depth & 1) {

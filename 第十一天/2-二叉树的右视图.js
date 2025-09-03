@@ -6,6 +6,14 @@
 //     2   3
 //      \   \
 //       5   6
+class TreeNode {
+  constructor(val, left = null, right = null) {
+    this.val = val;
+    this.left = left;
+    this.right = right;
+  }
+}
+
 const root = new TreeNode(
   1,
   new TreeNode(2, null, new TreeNode(5)),
@@ -25,3 +33,5 @@ var rightSideView = function (root) {
   dfs(root, 0);
   return res;
 };
+
+console.log(rightSideView(root));

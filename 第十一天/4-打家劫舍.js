@@ -4,10 +4,18 @@
 
 const nums = [2, 7, 9, 3, 1];
 
+// 动态规划方程：dp[n] = MAX( dp[n-1], dp[n-2] + num )
+// 由于不可以在相邻的房屋闯入，
+// 所以在当前位置 n 房屋可盗窃的最大值，要么就是 n-1 房屋可盗窃的最大值，
+// 要么就是 n-2 房屋可盗窃的最大值加上当前房屋的值，二者之间取最大值
+// 举例来说：1 号房间可盗窃最大值为 3 即为 dp[1]=3，2 号房间可盗窃最大值为 4 即为 dp[2]=4，
+// 3 号房间自身的值为 2 即为 num=2，那么 dp[3] = MAX( dp[2], dp[1] + num ) = MAX(4, 3+2) = 5，3 号房间可盗窃最大值为 5
+
 var rob = function (nums) {
   let dp = [];
   dp[0] = nums[0];
   dp[1] = Math.max(nums[0], nums[1]);
+  
   for (let i = 2; i < nums.length; i++) {
     dp[i] = Math.max(dp[i - 1], dp[i - 2] + nums[i]);
   }

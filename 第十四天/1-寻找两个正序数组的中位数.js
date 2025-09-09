@@ -1,9 +1,9 @@
 // 给定两个大小分别为 m 和 n 的正序（从小到大）数组 nums1 和 nums2。请你找出并返回这两个正序数组的 中位数 。
 // 算法的时间复杂度应该为 O(log (m+n)) 。
 
-const nums1 = [1, 2],
-  nums2 = [3, 4];
-//1 2 3
+// const nums1 = [1, 2],
+//   nums2 = [3, 4];
+// //1 2 3
 //1 2 3 4
 // 中位数是题目的关键词，即有序数列中间一个数(奇数个元素)或者中间两个数的算数平均数(偶数个元素)
 // 其实就是查找第k小数，对于奇数个元素 k=(len+1)/2，对于偶数个元素 k1=len/2 k2=len/2+1，最后将将两个公式合并一下 k=parseInt((len+1)/2)
@@ -46,7 +46,8 @@ const nums1 = [1, 2],
 
 // A = [7, 8, 9];
 // B = [1, 2, 3, 4, 5, 6];
-
+const nums1 = [7, 8, 9];
+const nums2 = [1, 2, 3, 4, 5, 6];
 var findMedianSortedArrays = function (nums1, nums2) {
   let len1 = nums1.length,
     len2 = nums2.length;
@@ -78,3 +79,5 @@ var findMedianSortedArrays = function (nums1, nums2) {
     }
   }
 };
+
+console.log(findMedianSortedArrays(nums1, nums2));

@@ -49,6 +49,7 @@
 const nums1 = [7, 8, 9];
 const nums2 = [1, 2, 3, 4, 5, 6];
 var findMedianSortedArrays = function (nums1, nums2) {
+  debugger;
   let len1 = nums1.length,
     len2 = nums2.length;
   if (len1 > len2) return findMedianSortedArrays(nums2, nums1);

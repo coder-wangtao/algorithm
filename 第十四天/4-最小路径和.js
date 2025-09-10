@@ -16,7 +16,7 @@ var minPathSum = function (grid) {
   // 列
   const col = grid[0].length;
   // 创建dp数组
-  const dp = Array.from(new Array(row), () => new Array(col).fill(1));
+  const dp = Array.from(new Array(row), () => new Array(col).fill(0));
   // 到达第一个点的路径和肯定为grid[0][0]值本身
   dp[0][0] = grid[0][0];
   // 求第一行每个点的最短路径和

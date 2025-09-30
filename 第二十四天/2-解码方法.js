@@ -38,6 +38,7 @@
 // 解释："06" 无法映射到 "F" ，因为存在前导零（"6" 和 "06" 并不等价）。
 
 // const s = "12";
+// 129 12 9  1 2 9
 const s = "226";
 var numDecodings = function (s) {
   const n = s.length;
@@ -46,7 +47,9 @@ var numDecodings = function (s) {
   const dp = new Array(n + 1).fill(0);
   dp[0] = 1; // 空串的解码方式为1
   dp[1] = 1; // 非0开头的字符串，长度为1时解码方式为1
-
+  //     2   22/2 2  2 26/22 6/2 2 6
+  //1    1     2            3
+  debugger;
   for (let i = 2; i <= n; i++) {
     const oneDigit = s[i - 1]; // 当前一位（字符）
     const twoDigits = s.slice(i - 2, i); // 当前两位（字符串）

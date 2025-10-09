@@ -8,16 +8,17 @@
 
 // s = "pww"
 // pw   2
-const s = "abcabcbb";
+const s = "aab";
 var lengthOfLongestSubstring = function (s) {
   let max = 0;
-  let res = [];
+  const res = [];
   for (let i = 0; i < s.length; i++) {
     const index = res.indexOf(s[i]);
     if (index === -1) {
       res.push(s[i]);
     } else {
       res.splice(0, index + 1);
+      res.push(s[i]);
     }
     max = Math.max(max, res.length);
   }

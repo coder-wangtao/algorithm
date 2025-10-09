@@ -19,7 +19,7 @@ var LRUCache = function (capacity) {
 LRUCache.prototype.get = function (key) {
   //获取的时候先删除再添加
   const val = this.map.get(key);
-  if (!val) {
+  if (val === undefined || val === null) {
     return -1;
   }
   //获取的时候先删除再添加
@@ -43,7 +43,7 @@ LRUCache.prototype.put = function (key, value) {
   if (this.map.size > this.capacity) {
     this.map.delete(keys.next().value);
   }
-  //到达容量时候删除最后一个
+  //到达容量时候删除第一个
 };
 
 /**

@@ -17,6 +17,7 @@ const root = new TreeNode(
 //    3
 //  9  20
 //15 7
+//结果：[[3],[20,9],[15,7]]
 var zigzagLevelOrder = function (root) {
   if (root == null) {
     return [];
@@ -42,3 +43,15 @@ var zigzagLevelOrder = function (root) {
 };
 
 console.log(zigzagLevelOrder(root));
+
+// 001
+// 001 ==> 1   奇数是1
+
+// 010
+// 001 ==> 0   偶数是0
+
+// 011
+// 001 ==> 1   奇数是1
+
+// 100
+// 001 ==> 0   偶数是0

@@ -9,7 +9,9 @@ const root = new Node(1, [
   new Node(2),
   new Node(4),
 ]);
-
+//      1
+//   3  2  4
+// 5  6
 var levelOrder = function (root) {
   const result = [];
   const queue = [];

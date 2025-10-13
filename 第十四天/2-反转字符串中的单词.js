@@ -11,6 +11,8 @@ var reverseWords = function (s) {
   let queue = [];
   let word = "";
   //去除
+  // let text = "HELLO WORLD";
+  // let letter = text.charAt(0); // 返回 "H"
   while (s.charAt(left) === " ") {
     left++;
   }

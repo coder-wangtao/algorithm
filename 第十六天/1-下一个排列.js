@@ -5,6 +5,8 @@
 
 // const nums = [4, 5, 2, 6, 3, 1];
 // [4, 5, 3, 6, 2, 1];
+// [4, 5, 3, 1, 2, 6];
+
 const nums = [4, 5, 2, 6, 3, 1];
 
 var nextPermutation = function (nums) {

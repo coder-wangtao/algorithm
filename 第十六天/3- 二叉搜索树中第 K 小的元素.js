@@ -32,6 +32,7 @@ var kthSmallest = function (root, k) {
 //   2   4
 //  /
 // 1
+// 1 2 3 4 5 6
 const root = new TreeNode(
   5,
   new TreeNode(3, new TreeNode(2, new TreeNode(1)), new TreeNode(4)),

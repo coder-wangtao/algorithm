@@ -5,10 +5,6 @@
 const nums = [5, 7, 7, 8, 8, 10],
   target = 8;
 
-//有序数组查找目标值问题首先想到的是二分法，查找左边界和右边界需要用两次二分法。
-// 这里将二分查找放入一个函数中，函数返回的是左边界。
-// 两次调用这个函数，第一次获得target的左边界，第二次获得target + 1的左边界，将第二次的结果减一就是target的右边界。
-
 var searchRange = function (nums, target) {
   var left = 0;
   var right = nums.length - 1;
@@ -19,6 +15,8 @@ var searchRange = function (nums, target) {
   while (left <= right) {
     let mid = (left + right) >> 1;
     if (nums[mid] === target) {
+      debugger;
+      // 当 nums[mid] === target 时，不立即返回，而是继续往左找（right = mid - 1）。
       right = mid - 1;
       first = mid;
     } else if (nums[mid] > target) {
@@ -27,13 +25,13 @@ var searchRange = function (nums, target) {
       left = mid + 1;
     }
   }
-
   // 找最后一个等于 target 的位置
   left = 0;
   right = nums.length - 1;
   while (left <= right) {
     let mid = (left + right) >> 1;
     if (nums[mid] === target) {
+      // 当 nums[mid] === target 时，不立即返回，而是继续往右找（left = mid + 1）。
       left = mid + 1;
       last = mid;
     } else if (nums[mid] > target) {

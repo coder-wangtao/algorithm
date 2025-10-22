@@ -7,66 +7,84 @@ function firstMissingPositive(nums) {
     constructor() {
       this.heap = [];
     }
-
-    getLeft(i) {
-      return 2 * i + 1;
-    }
-    getRight(i) {
-      return 2 * i + 2;
-    }
-    getParent(i) {
-      return Math.floor((i - 1) / 2);
-    }
-
-    // 上浮
-    heapifyUp(i) {
-      while (i > 0) {
-        let p = this.getParent(i);
-        if (this.heap[p] > this.heap[i]) {
-          [this.heap[p], this.heap[i]] = [this.heap[i], this.heap[p]];
-          i = p;
-        } else break;
-      }
-    }
-
-    // 下沉
-    heapifyDown(i) {
-      let smallest = i;
-      let left = this.getLeft(i);
-      let right = this.getRight(i);
-
-      if (left < this.heap.length && this.heap[left] < this.heap[smallest]) {
-        smallest = left;
-      }
-      if (right < this.heap.length && this.heap[right] < this.heap[smallest]) {
-        smallest = right;
-      }
-      if (smallest !== i) {
-        [this.heap[i], this.heap[smallest]] = [
-          this.heap[smallest],
-          this.heap[i],
-        ];
-        this.heapifyDown(smallest);
-      }
-    }
-
     push(val) {
       this.heap.push(val);
-      this.heapifyUp(this.heap.length - 1);
+      this._heapifyUp();
+    }
+    // 2,1
+    _heapifyUp() {
+      //从下往上堆化
+      const length = this.heap.length;
+      let index = length - 1;
+      while (index > 0) {
+        const child = this.heap[index];
+        const parentIndex = (index - 1) >>> 1;
+        const parent = this.heap[parentIndex];
+        if (child < parent) {
+          this.heap[parentIndex] = child;
+          this.heap[index] = parent;
+          index = parentIndex;
+        } else {
+          return;
+        }
+      }
     }
 
     pop() {
-      if (this.heap.length === 0) return null;
-      if (this.heap.length === 1) return this.heap.pop();
+      return this._heapifyDown();
+    }
 
-      let root = this.heap[0];
-      this.heap[0] = this.heap.pop();
-      this.heapifyDown(0);
-      return root;
+    //    2
+    //  5  3
+    //
+    _heapifyDown() {
+      //从上往下堆化
+      if (this.heap.length === 0) {
+        return null;
+      }
+      const first = this.heap[0];
+      const last = this.heap.pop();
+      if (first !== last) {
+        this.heap[0] = last;
+        let index = 0;
+        const length = this.heap.length;
+        const halfLength = length >>> 1;
+
+        while (index < halfLength) {
+          const leftIndex = (index + 1) * 2 - 1;
+          const left = this.heap[leftIndex];
+          const rightIndex = leftIndex + 1;
+          const right = this.heap[rightIndex];
+          if (left < last) {
+            if (right < left && rightIndex < length) {
+              //right最小
+              this.heap[index] = right;
+              this.heap[rightIndex] = last;
+              index = rightIndex;
+            } else {
+              //left最小
+              this.heap[index] = left;
+              this.heap[leftIndex] = last;
+              index = leftIndex;
+            }
+          } else if (right < last && rightIndex < length) {
+            this.heap[index] = right;
+            this.heap[rightIndex] = last;
+            index = rightIndex;
+          } else {
+            break;
+          }
+        }
+      }
+      return first;
+    }
+
+    size() {
+      return this.heap.length;
     }
 
     peek() {
-      return this.heap.length ? this.heap[0] : null;
+      return this.heap[0];
     }
 
     isEmpty() {
@@ -86,6 +104,10 @@ function firstMissingPositive(nums) {
   let smallest = 1;
   let prev = 0;
 
+  // 7,8,9,11,12
+  // 3,4,-1,1
+  //[1,2,0]
+  // 正整数，即大于0的整数如，1，2，3……
   while (!heap.isEmpty()) {
     let cur = heap.pop();
 

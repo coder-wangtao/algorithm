@@ -15,7 +15,6 @@ var searchRange = function (nums, target) {
   while (left <= right) {
     let mid = (left + right) >> 1;
     if (nums[mid] === target) {
-      debugger;
       // 当 nums[mid] === target 时，不立即返回，而是继续往左找（right = mid - 1）。
       right = mid - 1;
       first = mid;

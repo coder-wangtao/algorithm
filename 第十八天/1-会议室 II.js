@@ -23,6 +23,9 @@ var minMeetingRooms = function (intervals) {
     maxRooms = 0;
 
   while (s_ptr < intervals.length) {
+    //当有会议开始早于某个会议结束 → 说明要新开会议室。
+    //当有会议结束 → 可以释放一个会议室。
+    // 用 maxRooms 记录整个过程中所需的最大会议室数量。
     if (starts[s_ptr] < ends[e_ptr]) {
       rooms++;
       s_ptr++;

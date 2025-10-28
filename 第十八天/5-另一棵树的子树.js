@@ -46,6 +46,7 @@ var isSubtree = function (root, subRoot) {
     let isSame = leftSide && rightSide;
     return isSame;
   };
+  
   if (root === null) {
     return false;
   }

@@ -2,8 +2,12 @@
 
 // 请必须使用时间复杂度为 O(log n) 的算法。
 
-const nums = [1, 3, 5, 6];
-const target = 5;
+// const nums = [1, 3, 5, 6];
+// const target = 5;
+
+// const nums = [1, 3, 5, 6],
+const nums = [1, 1, 5, 6],
+  target = 2;
 var searchInsert = function (nums, target) {
   // 初始化左指针为0，右指针为nums最后一个元素
   let left = 0,
@@ -31,3 +35,5 @@ var searchInsert = function (nums, target) {
   // 如果nums[middle]>target,则在middle插入target即可
   return nums[middle] > target ? middle : middle + 1;
 };
+
+console.log(searchInsert(nums, target));

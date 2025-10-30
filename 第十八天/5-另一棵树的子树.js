@@ -28,32 +28,19 @@ const root = new TreeNode(
 
 const subRoot = new TreeNode(4, new TreeNode(1), new TreeNode(2));
 
-var isSubtree = function (root, subRoot) {
-  //此题也类似判断两个二叉树是否相等
-  //1. 确定递归函数参数
-  const compare = function (left, right) {
-    if (left === null && right === null) {
-      return true;
-    } else if (
-      (left !== null && right === null) ||
-      (left === null && right !== null) ||
-      left.val !== right.val
-    ) {
-      return false;
-    }
-    let leftSide = compare(left.left, right.left);
-    let rightSide = compare(left.right, right.right);
-    let isSame = leftSide && rightSide;
-    return isSame;
-  };
-  
-  if (root === null) {
-    return false;
+var isSubtree = function (s, t) {
+  if (s === null) return false;
+  if (t === null) return true;
+  return same(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);
+};
+
+var same = function (a, b) {
+  if (a == null && b === null) return true;
+  if (a === null || b === null) return false;
+  if (a.val === b.val) {
+    return same(a.left, b.left) && same(a.right, b.right);
   }
-  if (compare(root, subRoot)) {
-    return true;
-  }
-  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+  return false;
 };
 
 console.log(isSubtree(root, subRoot));

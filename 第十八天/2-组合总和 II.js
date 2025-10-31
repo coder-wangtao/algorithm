@@ -12,6 +12,7 @@
 
 var combinationSum2 = function (candidates, target) {
   candidates.sort((a, b) => a - b); //排序 确保重复元素相邻
+  // [1,1,1,2,5,6,7,10]
   let res = [];
   let path = [];
 
@@ -30,3 +31,13 @@ var combinationSum2 = function (candidates, target) {
   backtracing(path, 0, 0);
   return res;
 };
+
+const candidates = [1, 1, 1, 6],
+  target = 8;
+
+console.log(combinationSum2(candidates, 8));
+
+//1 1 1 6
+//1 1 6
+//1 1 6
+//1 1 6

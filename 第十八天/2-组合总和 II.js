@@ -11,16 +11,15 @@
 // ]
 
 var combinationSum2 = function (candidates, target) {
-  candidates.sort((a, b) => a - b); //排序 确保重复元素相邻
-  // [1,1,1,2,5,6,7,10]
+  candidates.sort((a, b) => a - b);
   let res = [];
   let path = [];
 
   const backtracing = (path, startIndex, sum) => {
     if (sum > target) return;
-    else if (sum === target) return res.push([...path]);
+    if (sum === target) return res.push([...path]);
     for (let i = startIndex; i < candidates.length; i++) {
-      if (i > startIndex && candidates[i] === candidates[i - 1]) continue; //三数之和去重的办法
+      if (i > startIndex && candidates[i] === candidates[i - 1]) continue;
       sum += candidates[i];
       path.push(candidates[i]);
       backtracing(path, i + 1, sum);
@@ -28,11 +27,12 @@ var combinationSum2 = function (candidates, target) {
       path.pop();
     }
   };
+
   backtracing(path, 0, 0);
   return res;
 };
 
-const candidates = [1, 1, 1, 6],
+const candidates = [10, 1, 2, 7, 6, 1, 5],
   target = 8;
 
 console.log(combinationSum2(candidates, 8));

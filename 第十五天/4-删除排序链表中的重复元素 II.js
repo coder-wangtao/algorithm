@@ -26,6 +26,7 @@ head.next.next.next.next = l5;
 head.next.next.next.next.next = l6;
 head.next.next.next.next.next.next = l7;
 
+// 0 -> 1 -> 2 -> 3 -> 3 -> 4 -> 4 -> 5
 var deleteDuplicates = function (head) {
   // 哑节点 next指向head
   let dummy = new ListNode(0, head);

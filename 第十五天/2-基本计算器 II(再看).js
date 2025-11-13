@@ -8,6 +8,14 @@ const s = "3+4*4+2";
 // 如果 ”-“ 将-num入栈
 // 如果 ”* /“ 将栈顶元素取出 运算后入栈(相除存在计算结果包含小数情况，| 0 逻辑运算后可去除小数部分)
 
+// "3+4*4+2"
+// 3
+// 3 压栈
+// 4
+// 3 4 压栈
+// 4
+// 3 16 2 压栈
+
 var calculate = function (s) {
   // 去除字符串两端的空格
   s = s.trim();
@@ -17,15 +25,14 @@ var calculate = function (s) {
 
   // 预设符号为“+”，表示第一个数默认为加法
   let preSign = "+",
-    num = 0,  // 用于保存当前解析的数字
-    n = s.length;  // 字符串的长度
+    num = 0, // 用于保存当前解析的数字
+    n = s.length; // 字符串的长度
 
   // 遍历整个字符串
   for (let i = 0; i < n; i++) {
-
     // 如果当前字符是数字（0-9），则将其加入当前数字 num 中
     if (s[i] >= "0") {
-      num = num * 10 + (s[i] - "0");  // 处理多位数
+      num = num * 10 + (s[i] - "0"); // 处理多位数
     }
 
     // 如果当前字符是运算符或是最后一个字符，处理当前的数字
@@ -55,7 +62,7 @@ var calculate = function (s) {
 
       // 更新 preSign 为当前字符（运算符）
       preSign = s[i];
-      
+
       // 重置 num 为 0，为下一个数字做准备
       num = 0;
     }
@@ -65,5 +72,5 @@ var calculate = function (s) {
   return stack.reduce((a, b) => {
     return a + b;
   }, 0);
-
+};
 console.log(calculate(s));

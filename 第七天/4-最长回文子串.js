@@ -59,6 +59,7 @@ var longestPalindrome = function (s) {
         }
       }
 
+      // 0 ，1，2，3
       // 更新最长回文子串的位置和长度
       if (dp[i][j] && j - i + 1 > maxLen) {
         maxLen = j - i + 1;
@@ -66,7 +67,6 @@ var longestPalindrome = function (s) {
       }
     }
   }
-  console.log(dp, "dp");
   return s.substring(begin, begin + maxLen);
 };
 

@@ -101,3 +101,5 @@ console.log(sortArray(arr)); // 输出 [5, 6, 7, 11, 12, 13]
 //    1
 //  2  3
 // 5
+
+// set "PGROOT=D:\postgral\18"

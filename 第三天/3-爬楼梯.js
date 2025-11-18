@@ -4,10 +4,11 @@
 // f(n) = f(n-1) + f(n-2)
 
 var climbStairs = function (n) {
-  if (n <= 2) {
-    return n;
+  let dp = [1, 2];
+  for (let i = 2; i < n; i++) {
+    dp[i] = dp[i - 1] + dp[i - 2];
   }
-  return climbStairs(n - 1) + climbStairs(n - 2);
+  return dp[n - 1];
 };
 
 console.log(climbStairs(3));

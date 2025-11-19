@@ -1,4 +1,5 @@
 //给你一个单链表的头节点 head ，请你判断该链表是否为回文链表。如果是，返回 true ；否则，返回 false 。
+// 回文 序列是向前和向后读都相同的序列。
 
 class ListNode {
   constructor(val = 0, next = null) {
@@ -6,12 +7,12 @@ class ListNode {
     this.next = next;
   }
 }
-
-// 创建一个测试链表：1 -> 2 -> 2 -> 1
+// 创建一个测试链表：1 -> 2 -> 3 -> 2 -> 1
 const head = new ListNode(1);
 head.next = new ListNode(2);
-head.next.next = new ListNode(2);
-head.next.next.next = new ListNode(1);
+head.next.next = new ListNode(3);
+head.next.next.next = new ListNode(2);
+head.next.next.next.next = new ListNode(1);
 
 var isPalindrome = function (head) {
   if (head == null) {

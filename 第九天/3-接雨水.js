@@ -6,13 +6,11 @@
 const height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1];
 
 var trap = function (height) {
-  // 初始化左右最大高度的变量 l_max 和 r_max，以及最终答案 ans
-  let l_max = 0,
-    r_max = 0,
-    ans = 0;
+  let l_max = 0, // 当前位置及其左边所有柱子的最高高度
+    r_max = 0, // 当前位置及其右边所有柱子的最高高度
+    ans = 0; // 累积的雨水量
   // 遍历整个高度数组
   for (let i = 0; i < height.length; i++) {
-    debugger;
     // 更新 l_max 为从左侧到当前位置的最大高度
     l_max = Math.max(l_max, height[i]);
     // 更新 r_max 为从右侧到当前位置的最大高度

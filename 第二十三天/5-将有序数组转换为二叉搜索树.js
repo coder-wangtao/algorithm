@@ -21,11 +21,11 @@ var sortedArrayToBST = function (nums) {
   // 因为是有序升序列表，则当前头部索引的左侧应该都在树的左子树，同理右子树
   if (left >= 0) {
     // 左侧有节点，对左侧节点递归，形成左子树
-    head.left = sortedArrayToBST(nums.slice(0, headIndex));
+    head.left = sortedArrayToBST(nums.slice(0, headIndex)); // [)前闭后开
   }
   if (right < nums.length) {
     // 右侧有节点，对右侧节点递归，形成右子树
-    head.right = sortedArrayToBST(nums.slice(right));
+    head.right = sortedArrayToBST(nums.slice(right)); // [)前闭后开
   }
   // 返回节点
   return head;

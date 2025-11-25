@@ -10,7 +10,8 @@
 // 表达式中不含除零运算。
 // 输入是一个根据逆波兰表示法表示的算术表达式。
 // 答案及所有中间计算结果可以用 32 位 整数表示。
-const tokens = ["4", "13", "5", "/", "+"];
+// ，也叫后缀表达式（将运算符写在操作数之后）。
+const tokens = ["4", "13", "5", "/", "-"];
 
 var evalRPN = function (tokens) {
   let stack = [];
@@ -29,10 +30,10 @@ var evalRPN = function (tokens) {
         break;
       case "/":
         num = stack.pop();
-        stack.push(parseInt(stack.pop() / num, 10));
+        stack.push(parseInt(stack.pop() / num));
         break;
       default:
-        stack.push(parseInt(char, 10));
+        stack.push(parseInt(char));
     }
   }
   return stack.pop();

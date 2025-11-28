@@ -4,7 +4,7 @@
  * @param {Node} node
  * @returns {Array<Set<string>>} 返回所有依赖链，每个链是一个字符串集合，每个字符串是一个节点名称
  */
-export function getDepChains(node, globalNodeMap) {
+function getDepChains(node, globalNodeMap) {
   // 存储所有找到的依赖链
   const chains = [];
 
@@ -17,7 +17,7 @@ export function getDepChains(node, globalNodeMap) {
    */
   function dfs(currentNode) {
     if (!currentNode) return;
-
+    debugger;
     // 检查是否形成环（当前节点已在路径中）
     if (currentPath.includes(currentNode.name)) {
       chains.push([...currentPath]);
@@ -55,23 +55,26 @@ export function getDepChains(node, globalNodeMap) {
 // C 依赖 D
 // D 没有依赖
 
-const globalNodeMap = {
-  A: { name: "A", effects: ["B", "C"] },
-  B: { name: "B", effects: ["D"] },
-  C: { name: "C", effects: ["D"] },
-  D: { name: "D", effects: [] },
-};
+//TODO:没有环
+// const globalNodeMap = {
+//   A: { name: "A", effects: ["B", "C"] },
+//   B: { name: "B", effects: ["D"] },
+//   C: { name: "C", effects: [] },
+//   D: { name: "D", effects: [] },
+//   E: { name: "E", effects: ["A"] }, // E 依赖 A，形成环
+// };
 
-// 从 A 开始
-// currentPath = [A]
-// 访问 B
-// currentPath = [B, A]
-// 访问 D
-// currentPath = [D, B, A]
-// D 没有依赖 → 保存路径
-// ✅ 第一条链：["D", "B", "A"]
-// 回溯回到 A，访问 C
-// currentPath = [C, A]
-// 访问 D
-// currentPath = [D, C, A]
-// ✅ 第二条链：["D", "C", "A"]
+//TODO:有环
+const globalNodeMap = {
+  A: { name: "A", effects: ["B"] },
+  B: { name: "B", effects: ["C"] },
+  C: { name: "C", effects: ["A"] }, // 这里形成了一个环：A -> B -> C -> A
+};
+const node = globalNodeMap["A"]; // 假设我们从 A 任务开始
+
+const res = getDepChains(node, globalNodeMap);
+console.log(res);
+// [
+//   ["D", "B", "A"],
+//   ["C", "A"],
+// ];

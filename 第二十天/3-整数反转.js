@@ -21,7 +21,7 @@ var reverse = function (x) {
   let digit = 0;
   while (num.length !== 0) {
     // 逐位出栈，并且乘上对应位数的计数单位
-    place = num.pop();
+    let place = num.pop();
     // 采用数学模块的幂函数
     x += place * Math.pow(10, digit);
     // 位数加一

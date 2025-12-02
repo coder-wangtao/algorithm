@@ -9,13 +9,16 @@ class ListNode {
   }
 }
 
-// 创建一个测试链表：1 -> 2 -> 3 -> 4 -> 5
+// 创建一个测试链表：1 -> 2 -> 3
+// null <- 1 <- 2
 const head = new ListNode(1);
 head.next = new ListNode(2);
 head.next.next = new ListNode(3);
 head.next.next.next = new ListNode(4);
 head.next.next.next.next = new ListNode(5);
-
+//k = 2
+// 1,2,3,4,5 => 2,1,4,3,5
+//2 -> 1 -> 4 -> 3 -> 5
 var reverseKGroup = function (head, k) {
   let pre = null; // 初始化 pre 为 null，用来保存已反转部分的前一个节点
   let cur = head; // cur 指向当前节点，从 head 开始

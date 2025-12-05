@@ -39,6 +39,7 @@ var sumNumbers = function (root) {
 //   new TreeNode(3, null, new TreeNode(6))
 // );
 
+// 124 + 125 + 136 = 385
 const root = new TreeNode(
   1,
   new TreeNode(2, null, null),

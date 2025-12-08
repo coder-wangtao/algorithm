@@ -24,6 +24,8 @@ var restoreIpAddresses = function (s, res = [], arr = [], start = 0) {
   for (let i = start; i < s.length; i++) {
     let str = s.substring(start, i + 1),
       strToNum = str - 0;
+    // 如果数字大于255，不是有效的 IP 段，结束循环（后面更长的子串只会更大，没必要继续）
+    // 如果字符串 str 和数字转换回的字符串不相等，说明有前导零，例如 "01" 转数字是 1，转换回字符串是 "1"，和原字符串不符，所以不合法，结束循环
     if (strToNum > 255 || str != strToNum + "") break;
     arr.push(str);
     restoreIpAddresses(s, res, arr, i + 1);

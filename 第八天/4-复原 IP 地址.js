@@ -12,35 +12,25 @@ const s = "25525511135";
 // 255 255 111 35
 // 255 255 11 135
 
-var restoreIpAddresses = function (s) {
-  let res = [];
-  for (let i = 0; i < 3; i++) {
-    // 第一位
-    let a = s.slice(0, i + 1);
-
-    if (!check(a)) continue;
-    for (let j = i + 1; j < i + 4; j++) {
-      // 第二位
-      let b = s.slice(i + 1, j + 1);
-      if (!check(b)) continue;
-      for (let k = j + 1; k < j + 4; k++) {
-        // 第三位
-        let c = s.slice(j + 1, k + 1);
-        let d = s.slice(k + 1);
-        let flag = check(c) && check(d);
-        flag && res.push(`${a}.${b}.${c}.${d}`);
-      }
-    }
+var restoreIpAddresses = function (s, res = [], arr = [], start = 0) {
+  // 如果字符串长度大于12或者小于4，直接返回，因为：
+  // IP 地址由4段组成，每段最多3位，最长12位
+  // 每段至少1位，最短4位
+  if (s.length > 12 || s.length < 4) return [];
+  // 递归终止条件：
+  // 如果已经有4段了，并且字符串的所有字符都被用完了，说明找到了一个合法的 IP 地址
+  // 把这4段用.拼接起来，加入结果数组 res，然后返回
+  if (arr.length == 4 && start == s.length) res.push(arr.join("."));
+  for (let i = start; i < s.length; i++) {
+    let str = s.substring(start, i + 1),
+      strToNum = str - 0;
+    if (strToNum > 255 || str != strToNum + "") break;
+    arr.push(str);
+    restoreIpAddresses(s, res, arr, i + 1);
+    arr.pop();
   }
   return res;
 };
-/* 判断是否合法*/
-function check(str) {
-  if (str === "" || str < 0 || str > 255) return false;
-  if (str[0] == "0" && str.length > 1) return false;
-  return true;
-}
-
 console.log(restoreIpAddresses(s));
 
 // backtrack("25525511135", [], result)

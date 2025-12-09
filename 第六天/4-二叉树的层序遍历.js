@@ -35,4 +35,4 @@ const root = new TreeNode(
 
 // 调用先序遍历并打印结果
 const res = levelOrder(root);
-console.log(res); // 期望输出: [1, 2, 4, 5, 3, 6]
+console.log(res); // 期望输出: [[1], [2, 3], [4, 5, 6]]

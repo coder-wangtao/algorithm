@@ -2,6 +2,7 @@
 // 同时还满足 nums[i] + nums[j] + nums[k] == 0 。请你返回所有和为 0 且不重复的三元组。
 const nums = [-1, 0, 1, 2, -1, -4];
 //[-4,-1,-1,0,1,2]
+// nums = [-2, -1, -1, 0, 1, 1, 2]
 var threeSum = function (nums) {
   nums = nums.sort((a, b) => a - b);
   let res = [];

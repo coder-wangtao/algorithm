@@ -6,6 +6,7 @@
 //     2   3
 //      \   \
 //       5   6
+// ===> [1,3,6]
 class TreeNode {
   constructor(val, left = null, right = null) {
     this.val = val;

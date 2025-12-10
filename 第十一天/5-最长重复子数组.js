@@ -1,5 +1,16 @@
 //给两个整数数组 nums1 和 nums2 ，返回 两个数组中 公共的 、长度最长的子数组的长度 。
 
+// 动态规划思想是希望连续的，也就是说上一个状态和下一个状态(自变量)之间有关系而且连续。
+// 公共子数组相当于子串：是连续的
+// dp[i][j]：表示第一个数组 A 前 i 个元素和数组 B 前 j 个元素组成的最长公共子数组(相当于子串)的长度。
+// 我们在计算 dp[i][j] 的时候：
+// 若当前两个元素值相同，即 A[i] == B[j]，则说明当前元素可以构成公共子数组，
+// 所以还要加上它们的前一元素构成的最长公共子数组的长度(在原来的基础上加 1)，
+// 此时状态转移方程：dp[i][j] = dp[i - 1][j - 1] + 1。
+// 若当前两个元素值不同，即 A[i] != B[j]，则说明当前元素无法构成公共子数组
+// (就是：当前元素不能成为公共子数组里的一员)。因为公共子数组必须是连续的，
+// 而此时的元素值不同，相当于直接断开了，此时状态转移方程：dp[i][j] = 0。
+
 //nums1 = [1,2,3,2,1]
 //nums2 = [3,2,1,4,7]
 
@@ -15,12 +26,12 @@ var findLength = function (nums1, nums2) {
   let n = nums1.length;
   let m = nums2.length;
   let maxans = 0;
-  let dp = Array.from(new Array(n+1), () => new Array(m+1).fill(0));
-  for (let i = 0; i < n; i++) {
-    for (let j = 0; j < m; j++) {
-      if (nums1[i] == nums2[j]) {
-        dp[1 + i][1 + j] = dp[i][j] + 1;
-        maxans = Math.max(maxans, dp[i + 1][j + 1]);
+  let dp = Array.from(new Array(n + 1), () => new Array(m + 1).fill(0));
+  for (let i = 1; i <= n; i++) {
+    for (let j = 1; j <= m; j++) {
+      if (nums1[i - 1] == nums2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+        maxans = Math.max(maxans, dp[i][j]);
       }
     }
   }

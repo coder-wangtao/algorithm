@@ -1,22 +1,17 @@
 const nums = [1, 2, 3];
 
 var subsets = function (nums) {
-  const res = [];
-  debugger;
-  const dfs = (index, list) => {
-    if (index == nums.length) {
-      // 指针越界
-      res.push(list.slice()); // 加入解集
-      return; // 结束当前的递归
+  let ans = [];
+  let backTracing = (start, path) => {
+    ans.push(path.slice());
+    for (let i = start; i < nums.length; i++) {
+      path.push(nums[i]);
+      backTracing(i + 1, path);
+      path.pop();
     }
-    list.push(nums[index]); // 选择这个数
-    dfs(index + 1, list); // 基于该选择，继续往下递归，考察下一个数
-    list.pop(); // 上面的递归结束，撤销该选择
-    dfs(index + 1, list); // 不选这个数，继续往下递归，考察下一个数
   };
-
-  dfs(0, []);
-  return res;
+  backTracing(0, []);
+  return ans;
 };
 
 console.log(subsets(nums));

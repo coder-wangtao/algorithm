@@ -18,17 +18,25 @@ var search = function (nums, target) {
     if (nums[start] == target) return start;
     if (nums[mid] == target) return mid;
     if (nums[end] == target) return end;
-    
+
+    // 判断哪一半是升序
+    // 如果左半部分是升序的(nums[start] < nums[mid])
+    // 说明从 start 到 mid 是一个连续升序段。
     if (nums[start] < nums[mid]) {
       if (target > nums[start] && target < nums[mid]) {
+        // 如果目标在升序段内，就把右边界收缩到 mid-1。
         end = mid - 1;
       } else {
+        // 否则说明目标在另一半，移动左边界到 mid+1。
         start = mid + 1;
       }
     } else {
       if (target > nums[mid] && target < nums[end]) {
+        //如果左半部分不是升序,那右半部分肯定是升序的。
+        //判断目标是否在右半部分，如果是，移动 start
         start = mid + 1;
       } else {
+        // 否则移动 end。
         end = mid - 1;
       }
     }

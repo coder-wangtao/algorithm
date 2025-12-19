@@ -8,7 +8,8 @@
 // 2.遍历数组重组链表，偶数栈顶弹出，奇数队列出队。
 
 // 创建一个测试链表：1 -> 2 -> 3 -> 4  ==> 1 -> 4 -> 2 -> 3
-
+// 创建一个测试链表：1 -> 2 -> 3 -> 4 -> 5 => 1 -> 5 -> 2 -> 4 -> 3
+//
 class ListNode {
   constructor(val = 0, next = null) {
     this.val = val;
@@ -23,16 +24,15 @@ head.next.next.next = new ListNode(4);
 
 function reorderList(head) {
   const arr = [];
-
   while (head) {
     const temp = head.next;
     head.next = null;
     arr.push(head);
     head = temp;
   }
-  let cur = arr.shift(),
-    i = 0;
-  debugger;
+
+  let cur = arr.shift();
+  i = 0;
   while (arr.length) {
     cur.next = i++ % 2 === 0 ? arr.pop() : arr.shift();
     cur = cur.next;

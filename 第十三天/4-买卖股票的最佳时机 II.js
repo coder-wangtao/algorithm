@@ -14,6 +14,8 @@ var maxProfit = function (prices) {
   if (!prices || prices.length <= 1) return 0;
   let res = 0,
     tmp;
+  // prices[i] - prices[i - 1]：计算今天的价格与昨天的价格之间的差值（即今天的利润）。
+  // 如果差值为正数，即今天的价格高于昨天的价格，说明可以从昨天买入、今天卖出，获得利润。因此，把这个利润累加到 res 中。
   for (let i = 1; i < prices.length; i++) {
     if ((tmp = prices[i] - prices[i - 1]) > 0) res += tmp;
   }

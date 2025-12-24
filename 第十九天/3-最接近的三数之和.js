@@ -36,3 +36,5 @@ const threeSumClosest = (nums, target) => {
   // 遍历结束，返回最接近的和
   return min;
 };
+
+threeSumClosest(nums, target);

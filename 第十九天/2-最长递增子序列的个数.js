@@ -1,6 +1,6 @@
 // 给定一个未排序的整数数组 nums ， 返回最长递增子序列的个数 。
 // 注意 这个数列必须是 严格 递增的。
-
+//TODO: https://leetcode.cn/problems/number-of-longest-increasing-subsequence/solutions/433669/dong-tai-gui-hua-dong-tu-fu-zhu-li-jie-ru-you-bang/
 const nums = [1, 3, 5, 4, 7];
 // 有两个最长递增子序列，分别是 [1, 3, 4, 7] 和[1, 3, 5, 7]。
 

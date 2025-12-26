@@ -3,7 +3,13 @@
 // 返回这三个数的和。
 
 // 假定每组输入只存在恰好一个解。
+
+// 先将数组进行排序，使用快排时间复杂度nlog(n)
+// 定义指针left和right,当a+b+c>target right--,当a+b+c<target left++
+// 比较sum-target绝对值，绝对值小的存储为result
+
 const nums = [-1, 2, 1, -4],
+  // [-4, -1, 1, 2]
   target = 1;
 
 const threeSumClosest = (nums, target) => {

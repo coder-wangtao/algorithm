@@ -29,7 +29,7 @@ var zigzagLevelOrder = function (root) {
         res[depth] = [];
       }
       if (depth & 1) {
-        //depth & 1 = 1基数基数，depth & 1 = 0为偶数
+        //depth & 1 = 1为基数，depth & 1 = 0为偶数
         res[depth].unshift(root.val);
       } else {
         res[depth].push(root.val);

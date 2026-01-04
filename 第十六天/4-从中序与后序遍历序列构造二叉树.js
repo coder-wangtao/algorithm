@@ -16,6 +16,7 @@ var buildTree = function (inorder, postorder) {
   const top = postorder.pop();
   const root = new TreeNode(top);
   const topIndex = inorder.indexOf(top);
+  debugger;
   root.left = buildTree(
     inorder.slice(0, topIndex),
     postorder.slice(0, topIndex)

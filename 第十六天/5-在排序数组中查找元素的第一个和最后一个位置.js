@@ -15,7 +15,12 @@ var searchRange = function (nums, target) {
   var first = -1;
   var last = -1;
 
+  //TODO: nums = [1, 2, 2, 2, 3]
+  //TODO: mid = 2; // nums[2] == 2 == target
+  //TODO: 虽然 mid 是一个目标值的位置，但它不是第一个出现的目标值，因为索引 1 也是 2。
+  //TODO: 所以我们不能立刻返回 mid，而是要继续往左边找有没有更早的出现。
   // 找第一个等于 target 的位置
+  // 循环结束后，first 就是第一个出现的位置（如果没找到过就还是 -1）。
   while (left <= right) {
     let mid = (left + right) >> 1;
     if (nums[mid] === target) {
@@ -28,13 +33,19 @@ var searchRange = function (nums, target) {
       left = mid + 1;
     }
   }
+
+  //TODO: nums = [1, 2, 2, 2, 3]
+  //TODO: mid = 2  // nums[2] == 2 == target
+  // 它是目标值，但后面索引 3 也是 2，所以我们还得往右边找。
   // 找最后一个等于 target 的位置
+  // 循环结束后，last 就是最后一个出现的位置（找不到则还是 -1）。
   left = 0;
   right = nums.length - 1;
   while (left <= right) {
     let mid = (left + right) >> 1;
     if (nums[mid] === target) {
       // 当 nums[mid] === target 时，不立即返回，而是继续往右找（left = mid + 1）。
+      // 这一次如果 nums[mid] 等于 target，更新 last，然后把左边界 left 移动到 mid + 1，继续往右边找更晚出现的 target。
       left = mid + 1;
       last = mid;
     } else if (nums[mid] > target) {

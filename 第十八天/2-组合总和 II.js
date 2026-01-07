@@ -19,6 +19,9 @@ var combinationSum2 = function (candidates, target) {
     if (sum > target) return;
     if (sum === target) return res.push([...path]);
     for (let i = startIndex; i < candidates.length; i++) {
+      // 如果当前数字和前一个数字相同，并且不是该递归层的第一个数字，就跳过。
+      // candidates = [1, 1, 2], startIndex = 0
+      // i = 1 时, candidates[1] === candidates[0] => skip
       if (i > startIndex && candidates[i] === candidates[i - 1]) continue;
       sum += candidates[i];
       path.push(candidates[i]);

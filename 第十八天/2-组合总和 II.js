@@ -14,14 +14,26 @@ var combinationSum2 = function (candidates, target) {
   candidates.sort((a, b) => a - b);
   let res = [];
   let path = [];
-
+  // [10, 1, 2, 7, 6, 1, 5] => 1 1 2 5 6 7 10
   const backtracing = (path, startIndex, sum) => {
     if (sum > target) return;
     if (sum === target) return res.push([...path]);
     for (let i = startIndex; i < candidates.length; i++) {
       // 如果当前数字和前一个数字相同，并且不是该递归层的第一个数字，就跳过。
-      // candidates = [1, 1, 2], startIndex = 0
-      // i = 1 时, candidates[1] === candidates[0] => skip
+      // [
+      //   [1, 1, 6],
+      //   [1, 2, 5],
+      //   [1, 7],
+      //   [2, 6],
+      // ];
+      // [
+      //   [1, 1, 6],
+      //   [1, 2, 5],
+      //   [1, 7],
+      //   [1, 2, 5],
+      //   [1, 7],
+      //   [2, 6],
+      // ];
       if (i > startIndex && candidates[i] === candidates[i - 1]) continue;
       sum += candidates[i];
       path.push(candidates[i]);
@@ -38,7 +50,7 @@ var combinationSum2 = function (candidates, target) {
 const candidates = [10, 1, 2, 7, 6, 1, 5],
   target = 8;
 
-console.log(combinationSum2(candidates, 8));
+console.log(combinationSum2(candidates, target));
 
 //1 1 1 6
 //1 1 6

@@ -1,0 +1,70 @@
+.email-container {
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 400px;
+  min-height: 40px;
+  position: relative;
+  border-radius: 4px;
+}
+
+.email-list {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.email-list li {
+  background-color: #e6f7ff;
+  padding: 4px 8px;
+  margin: 2px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+}
+
+.email-list li.invalid {
+  background-color: #ffe6e6;
+  color: #d00;
+}
+
+.email-list li span {
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+#email-input {
+  border: none;
+  outline: none;
+  flex: 1;
+  min-width: 150px;
+  padding: 4px;
+}
+
+.suggest-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ccc;
+  width: 380px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #fff;
+  display: none;
+  z-index: 1000;
+}
+
+.suggest-list li {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+
+.suggest-list li.active,
+.suggest-list li:hover {
+  background: #f0f0f0;
+}
